@@ -7,7 +7,7 @@ install:
 before_build:
 - nuget restore
 - ps: gitversion /l console /output buildserver /updateAssemblyInfo
-- ps: Update-AppveyorBuild -Version "%GitVersion_NuGetVersion%"
+- ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
 
 build:
   publish_nuget: true

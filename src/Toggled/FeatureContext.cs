@@ -17,8 +17,6 @@ namespace Toggled
 
         public bool IsEnabled(IFeature feature)
         {
-            bool val = false;
-
             foreach (IFeatureToggle toggle in _toggleProvider.GetFeatureToggles())
             {
                 bool? result = toggle.IsEnabled(feature);

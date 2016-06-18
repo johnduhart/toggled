@@ -12,9 +12,13 @@ before_build:
 - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 #- ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
 
+configuration:
+  - Release
+
 build:
   publish_nuget: false
   verbosity: minimal
+  project: Toggled.sln
 
 test:
   assemblies:

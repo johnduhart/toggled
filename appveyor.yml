@@ -6,13 +6,19 @@ install:
 
 before_build:
 - nuget restore
+- nuget install xunit.runner.console -ExcludeVersion -OutputDirectory packages
+- set xunit20=%APPVEYOR_BUILD_FOLDER%\packages\xunit.runner.console\tools
 - ps: gitversion /l console /output buildserver /updateAssemblyInfo
-- ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
+#- ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
 
 build:
   publish_nuget: false
   verbosity: minimal
 
+test:
+  assemblies:
+    - '**\Toggled.Tests.dll'
+
 on_success:
-  - cmd: nuget pack src\Toggled\Toggled.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"

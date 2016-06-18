@@ -10,5 +10,9 @@ before_build:
 - ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
 
 build:
-  publish_nuget: true
+  publish_nuget: false
   verbosity: minimal
+
+on_success:
+  - cmd: nuget pack src\Toggled\Toggled.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"

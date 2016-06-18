@@ -40,8 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FeatureStateNotFoundException.cs" />
+    <Compile Include="Exceptions\MissingFeatureContextException.cs" />
+    <Compile Include="Exceptions\ToggledException.cs" />
+    <Compile Include="FeatureBuilder.cs" />
+    <Compile Include="FeatureContext.cs" />
     <Compile Include="IFeature.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="IFeatureContext.cs" />
+    <Compile Include="IFeatureToggle.cs" />
+    <Compile Include="IFeatureToggleProvider.cs" />
+    <Compile Include="IFeatureTrait.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ install:
 
 before_build:
 - nuget restore
+- nuget install OpenCover -ExcludeVersion -OutputDirectory packages
 - nuget install xunit.runner.console -ExcludeVersion -OutputDirectory packages
 - set xunit20=%APPVEYOR_BUILD_FOLDER%\packages\xunit.runner.console\tools
 - ps: gitversion /l console /output buildserver /updateAssemblyInfo
@@ -18,6 +19,12 @@ build:
 test:
   assemblies:
     - '**\Toggled.Tests.dll'
+
+after_test:
+  - ps: ./Build.coverage.ps1
+  - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+  - pip install codecov
+  - codecov -f "Toggled_coverage.xml"
 
 on_success:
   - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"

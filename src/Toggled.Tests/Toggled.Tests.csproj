@@ -56,6 +56,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -88,10 +89,13 @@
     <Compile Include="FeatureContextTests.cs" />
     <Compile Include="FeatureTests.cs" />
     <Compile Include="Fixtures\FeatureFixture.cs" />
+    <Compile Include="Helpers\AppSetting.cs" />
     <Compile Include="Helpers\ContextSwitcher.cs" />
     <Compile Include="Helpers\Ignore.cs" />
     <Compile Include="Helpers\ToggledAutoData.cs" />
+    <Compile Include="Helpers\ToggledInlineAutoDataAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Toggles\AppSettingsToggleTests.cs" />
     <Compile Include="Toggles\DefaultValueToggleTests.cs" />
     <Compile Include="TraitTests.cs" />
   </ItemGroup>

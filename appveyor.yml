@@ -33,3 +33,12 @@ after_test:
 on_success:
   - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"
+
+deploy:
+  - provider: NuGet
+    server: https://www.myget.org/F/johnduhart-nuget-ci/api/v2/package
+    symbol_server: https://www.myget.org/F/johnduhart-nuget-ci/symbols/api/v2/package
+    api_key:
+      secure: 3a5c7wSEJSm+SEGYU07ytloSKrgc+rZ1VavXlzDk7X6BgB5JLBps/STsBr2/8X8b
+    on:
+      branch: develop

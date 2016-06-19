@@ -17,5 +17,10 @@ namespace Toggled
 
             return Context.IsEnabled(feature);
         }
+
+        public static bool IsDisabled(IFeature feature)
+        {
+            return !IsEnabled(feature);
+        }
     }
 }

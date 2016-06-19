@@ -83,6 +83,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FeatureBuilderTests.cs" />
+    <Compile Include="FeatureContextExtensionsTests.cs" />
     <Compile Include="FeatureContextTests.cs" />
     <Compile Include="FeatureTests.cs" />
     <Compile Include="Helpers\ContextSwitcher.cs" />

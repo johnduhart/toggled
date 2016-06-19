@@ -45,6 +45,7 @@
     <Compile Include="Exceptions\ToggledException.cs" />
     <Compile Include="FeatureBuilder.cs" />
     <Compile Include="FeatureContext.cs" />
+    <Compile Include="FeatureContextExtensions.cs" />
     <Compile Include="IFeature.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="IFeatureContext.cs" />

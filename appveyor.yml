@@ -20,6 +20,10 @@ build:
   verbosity: minimal
   project: Toggled.sln
 
+after_build:
+  - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"
+
 test:
   assemblies:
     - '**\Toggled.Tests.dll'
@@ -29,10 +33,6 @@ after_test:
   - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
   - pip install codecov
   - codecov -f "Toggled_coverage.xml"
-
-on_success:
-  - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"
 
 deploy:
   - provider: NuGet

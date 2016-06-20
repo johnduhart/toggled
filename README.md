@@ -2,7 +2,7 @@ Toggled
 =======
 Feature toggles for .NET
 
-[![NPM Version](https://img.shields.io/nuget/v/Toggled.svg)](https://www.nuget.org/packages/Toggled/) [![MyGet Pre Release](https://img.shields.io/myget/johnduhart-nuget-ci/vpre/Toggled.svg?maxAge=2592000)]()
+[![NPM Version](https://img.shields.io/nuget/v/Toggled.svg)](https://www.nuget.org/packages/Toggled/) [![MyGet Pre Release](https://img.shields.io/myget/johnduhart-nuget-ci/vpre/Toggled.svg?maxAge=2592000)](https://www.myget.org/feed/johnduhart-nuget-ci/package/nuget/Toggled)
 
 |Branch|AppVeyor|CodeCov|
 |------|:--------:|:------:|

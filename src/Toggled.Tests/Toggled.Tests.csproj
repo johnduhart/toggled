@@ -88,6 +88,7 @@
     <Compile Include="FeatureContextExtensionsTests.cs" />
     <Compile Include="FeatureContextTests.cs" />
     <Compile Include="FeatureTests.cs" />
+    <Compile Include="FeatureToggleProviderTests.cs" />
     <Compile Include="Fixtures\FeatureFixture.cs" />
     <Compile Include="Helpers\AppSetting.cs" />
     <Compile Include="Helpers\ContextSwitcher.cs" />

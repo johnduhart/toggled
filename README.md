@@ -27,7 +27,7 @@ IFeature MyFeature = FeatureBuilder.Create("MyFeature")
 						.Build();
 ```
 
-And then check to see if its enabled.
+And then check to see if it's enabled.
 
 ```csharp
 if (Feature.IsEnabled(MyFeature))

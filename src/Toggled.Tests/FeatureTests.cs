@@ -39,5 +39,37 @@ namespace Toggled.Tests
                     .MustHaveHappened();
             }
         }
+
+        public class IsDisabled
+        {
+            [Fact]
+            public void ThrowsOnNullFeature()
+            {
+                Assert.Throws<ArgumentNullException>(() => Feature.IsDisabled(null));
+            }
+
+            [Theory, ToggledAutoData]
+            public void ThrowsOnMissingContext(IFeature feature)
+            {
+                Assert.Throws<MissingFeatureContextException>(() => Feature.IsDisabled(feature));
+            }
+
+            [Theory, ToggledAutoData]
+            public void ReturnsIsEnabledFromContext(IFeature feature, IFeatureContext context, bool expected)
+            {
+                A.CallTo(() => context.IsEnabled(feature))
+                    .Returns(expected);
+
+                bool result;
+                using (ContextSwitcher.For(context))
+                {
+                    result = Feature.IsDisabled(feature);
+                }
+
+                Assert.Equal(!expected, result);
+                A.CallTo(() => context.IsEnabled(feature))
+                    .MustHaveHappened();
+            }
+        }
     }
 }

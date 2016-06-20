@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Toggled
 {
-    public class FeatureBuilder
+    public class FeatureBuilder : IFeatureBuilder
     {
         private readonly string _featureId;
         private readonly List<IFeatureTrait> _traits = new List<IFeatureTrait>();
@@ -40,7 +40,7 @@ namespace Toggled
             public IEnumerable<IFeatureTrait> Traits { get; internal set; }
         }
 
-        public FeatureBuilder Description(string description)
+        public IFeatureBuilder Description(string description)
         {
             if (description == null)
                 throw new ArgumentNullException(nameof(description));
@@ -49,7 +49,7 @@ namespace Toggled
             return this;
         }
 
-        public FeatureBuilder WithTrait(IFeatureTrait trait)
+        public IFeatureBuilder WithTrait(IFeatureTrait trait)
         {
             if (trait == null)
                 throw new ArgumentNullException(nameof(trait));

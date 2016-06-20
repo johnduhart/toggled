@@ -88,12 +88,17 @@ namespace Toggled.Tests
         }
 
         [Theory, ToggledAutoData]
-        public void IsEnabledThrowsWhenNoToggleProviderHasState([Frozen] IFeatureToggleProvider toggleProvider,
-            IFeature feature, FeatureContext sut)
+        public void IsEnabledThrowsWhenNoToggleProviderHasState(IFeature feature, FeatureContext sut)
         {
             var exception = Assert.Throws<FeatureStateNotFoundException>(() => sut.IsEnabled(feature));
 
             Assert.Same(feature, exception.Feature);
+        }
+
+        [Theory, ToggledAutoData]
+        public void IsEnabledThrowsWhenGivenNullFeature(FeatureContext sut)
+        {
+            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(feature: null));
         }
     }
 }

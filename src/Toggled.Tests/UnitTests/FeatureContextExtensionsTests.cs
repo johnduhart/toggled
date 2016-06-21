@@ -4,7 +4,7 @@ using FakeItEasy;
 using Toggled.Tests.Helpers;
 using Xunit;
 
-namespace Toggled.Tests
+namespace Toggled.Tests.UnitTests
 {
     [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
     public class FeatureContextExtensionsTests

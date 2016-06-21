@@ -2,7 +2,7 @@ using Toggled.Tests.Helpers;
 using Toggled.Traits;
 using Xunit;
 
-namespace Toggled.Tests
+namespace Toggled.Tests.UnitTests
 {
     public class TraitTests
     {

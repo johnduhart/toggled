@@ -5,7 +5,7 @@ using Toggled.Tests.Helpers;
 using Toggled.Toggles;
 using Xunit;
 
-namespace Toggled.Tests.Toggles
+namespace Toggled.Tests.UnitTests.Toggles
 {
     public class AppSettingsToggleTests
     {

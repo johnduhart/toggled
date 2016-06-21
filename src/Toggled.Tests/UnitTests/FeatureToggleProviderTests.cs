@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Toggled.Tests.Helpers;
-using Toggled.Toggles;
-using Toggled.Traits;
 using Xunit;
 
-namespace Toggled.Tests
+namespace Toggled.Tests.UnitTests
 {
     public class FeatureToggleProviderTests
     {

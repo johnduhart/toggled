@@ -7,7 +7,7 @@ using Toggled.Toggles;
 using Toggled.Traits;
 using Xunit;
 
-namespace Toggled.Tests.Toggles
+namespace Toggled.Tests.UnitTests.Toggles
 {
     public class DefaultValueToggleTests
     {

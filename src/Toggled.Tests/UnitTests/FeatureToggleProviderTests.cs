@@ -10,23 +10,23 @@ namespace Toggled.Tests.UnitTests
         [Fact]
         public void ConstructorThrowsExceptionWhenGivenNoFeatureToggles()
         {
-            Assert.Throws<ArgumentException>(() => new FeatureToggleProvider(new IFeatureToggle[0]));
+            Assert.Throws<ArgumentException>(() => new FeatureTogglerSource(new IFeatureToggler[0]));
         }
 
         [Fact]
         public void ConstructorThrowsExceptionWhenGivenNullFeatureToggles()
         {
-            Assert.Throws<ArgumentNullException>(() => new FeatureToggleProvider(null));
+            Assert.Throws<ArgumentNullException>(() => new FeatureTogglerSource(null));
         }
 
         [Theory, ToggledAutoData]
-        public void GetFeatureTogglesReturnsFeatureToggles(IFeatureToggle[] featureToggles)
+        public void GetFeatureTogglesReturnsFeatureToggles(IFeatureToggler[] featureTogglers)
         {
-            var sut = new FeatureToggleProvider(featureToggles);
+            var sut = new FeatureTogglerSource(featureTogglers);
 
-            IEnumerable<IFeatureToggle> result = sut.GetFeatureToggles();
+            IEnumerable<IFeatureToggler> result = sut.GetFeatureToggles();
 
-            Assert.Same(featureToggles, result);
+            Assert.Same(featureTogglers, result);
         }
     }
 }

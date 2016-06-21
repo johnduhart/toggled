@@ -18,52 +18,52 @@ namespace Toggled.Tests.UnitTests
         }
 
         [Theory, ToggledAutoData]
-        public void IsEnabledCallsGetsFeatureToggles([Frozen] IFeatureToggleProvider toggleProvider, IFeature feature,
+        public void IsEnabledCallsGetsFeatureToggles([Frozen] IFeatureTogglerSource togglerSource, IFeature feature,
             FeatureContext sut)
         {
             Ignore.Exception<FeatureStateNotFoundException, bool>(() => sut.IsEnabled(feature));
 
-            A.CallTo(() => toggleProvider.GetFeatureToggles())
+            A.CallTo(() => togglerSource.GetFeatureToggles())
                 .MustHaveHappened();
         }
 
         [Theory, ToggledAutoData]
-        public void IsEnabledCallsIsEnabledOnToggle([Frozen] IFeatureToggleProvider toggleProvider, IFeature feature,
-            IFeatureToggle featureToggle, bool expected, FeatureContext sut)
+        public void IsEnabledCallsIsEnabledOnToggle([Frozen] IFeatureTogglerSource togglerSource, IFeature feature,
+            IFeatureToggler featureToggler, bool expected, FeatureContext sut)
         {
-            A.CallTo(() => featureToggle.IsEnabled(sut, feature))
+            A.CallTo(() => featureToggler.IsEnabled(sut, feature))
                 .Returns(expected);
-            A.CallTo(() => toggleProvider.GetFeatureToggles())
-                .Returns(new[] {featureToggle});
+            A.CallTo(() => togglerSource.GetFeatureToggles())
+                .Returns(new[] {featureToggler});
 
             bool result = sut.IsEnabled(feature);
 
-            A.CallTo(() => featureToggle.IsEnabled(sut, feature))
+            A.CallTo(() => featureToggler.IsEnabled(sut, feature))
                 .MustHaveHappened();
             Assert.Equal(expected, result);
         }
 
         [Theory, ToggledAutoData]
-        public void IsEnabledCallsAllToggles([Frozen] IFeatureToggleProvider toggleProvider, IFeature feature,
+        public void IsEnabledCallsAllToggles([Frozen] IFeatureTogglerSource togglerSource, IFeature feature,
             Fixture fixture, FeatureContext sut)
         {
-            var featureToggles = fixture.CreateMany<Fake<IFeatureToggle>>().ToList();
-            foreach (Fake<IFeatureToggle> fake in featureToggles)
+            var featureToggles = fixture.CreateMany<Fake<IFeatureToggler>>().ToList();
+            foreach (Fake<IFeatureToggler> fake in featureToggles)
             {
                 fake.CallsTo(ft => ft.IsEnabled(sut, feature))
                     .Returns(null);
             }
-            var finalTogle = A.Fake<Fake<IFeatureToggle>>();
+            var finalTogle = A.Fake<Fake<IFeatureToggler>>();
             finalTogle.CallsTo(ft => ft.IsEnabled(sut, feature))
                 .Returns(true);
             featureToggles.Add(finalTogle);
 
-            A.CallTo(() => toggleProvider.GetFeatureToggles())
+            A.CallTo(() => togglerSource.GetFeatureToggles())
                 .Returns(featureToggles.Select(f => f.FakedObject));
 
             sut.IsEnabled(feature);
 
-            foreach (Fake<IFeatureToggle> fake in featureToggles)
+            foreach (Fake<IFeatureToggler> fake in featureToggles)
             {
                 fake.CallsTo(ft => ft.IsEnabled(sut, feature))
                     .MustHaveHappened();
@@ -71,19 +71,19 @@ namespace Toggled.Tests.UnitTests
         }
 
         [Theory, ToggledAutoData]
-        public void IsEnabledUsesFirstToggleProviderResult([Frozen] IFeatureToggleProvider toggleProvider,
-            IFeature feature, IFeatureToggle skippedToggle, IFeatureToggle enabledToggle, IFeatureToggle endToggle,
+        public void IsEnabledUsesFirstToggleProviderResult([Frozen] IFeatureTogglerSource togglerSource,
+            IFeature feature, IFeatureToggler skippedToggler, IFeatureToggler enabledToggler, IFeatureToggler endToggler,
             bool expected, FeatureContext sut)
         {
-            A.CallTo(() => enabledToggle.IsEnabled(sut, feature))
+            A.CallTo(() => enabledToggler.IsEnabled(sut, feature))
                 .Returns(expected);
-            A.CallTo(() => toggleProvider.GetFeatureToggles())
-                .Returns(new[] {skippedToggle, enabledToggle, endToggle});
+            A.CallTo(() => togglerSource.GetFeatureToggles())
+                .Returns(new[] {skippedToggler, enabledToggler, endToggler});
 
             bool result = sut.IsEnabled(feature);
 
             Assert.Equal(expected, result);
-            A.CallTo(() => endToggle.IsEnabled(sut, feature))
+            A.CallTo(() => endToggler.IsEnabled(sut, feature))
                 .MustNotHaveHappened();
         }
 

@@ -1,4 +1,4 @@
-﻿using Toggled.Toggles;
+﻿using Toggled.Togglers;
 using Toggled.Traits;
 using Xunit;
 
@@ -24,7 +24,7 @@ namespace Toggled.Tests.IntegrationTests
                 .DependentOn(BaseFeature)
                 .Build();
 
-            _featureContext = new FeatureContext(new FeatureToggleProvider(new DependentFeatureToggle(), new DefaultValueToggle()));
+            _featureContext = new FeatureContext(new FeatureTogglerSource(new DependentFeatureToggler(), new DefaultValueToggler()));
         }
 
         [Fact]

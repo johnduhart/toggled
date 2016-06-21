@@ -2,7 +2,7 @@
 using Ploeh.AutoFixture;
 using Toggled.Tests.Fixtures;
 using Toggled.Tests.Helpers;
-using Toggled.Toggles;
+using Toggled.Togglers;
 using Xunit;
 
 namespace Toggled.Tests.UnitTests.Toggles
@@ -17,12 +17,12 @@ namespace Toggled.Tests.UnitTests.Toggles
         [ToggledInlineAutoData("False", false)]
         [ToggledInlineAutoData("on", null)]
         [ToggledInlineAutoData("1", null)]
-        public void ReturnsAppSettingValueWhenSet(string value, bool? expected, FeatureFixture feature, Fixture fixture, AppSettingsToggle sut)
+        public void ReturnsAppSettingValueWhenSet(string value, bool? expected, FeatureFixture feature, Fixture fixture, AppSettingsToggler sut)
         {
             // Apparently AutoFixture will reuse the feature
             feature.Id = fixture.Create<string>();
 
-            using (AppSetting.Use($"{AppSettingsToggle.SettingsPrefix}{feature.Id}", value))
+            using (AppSetting.Use($"{AppSettingsToggler.SettingsPrefix}{feature.Id}", value))
             {
                 bool? result = sut.IsEnabled(null, feature);
 
@@ -31,7 +31,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         }
 
         [Theory, ToggledAutoData]
-        public void ReturnsNullWhenNoValueExists(FeatureFixture feature, Fixture fixture, AppSettingsToggle sut)
+        public void ReturnsNullWhenNoValueExists(FeatureFixture feature, Fixture fixture, AppSettingsToggler sut)
         {
             feature.Id = fixture.Create<string>();
 
@@ -41,7 +41,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         }
 
         [Theory, ToggledAutoData]
-        public void ThrowsExceptionWhenGivenNullFeature(AppSettingsToggle sut)
+        public void ThrowsExceptionWhenGivenNullFeature(AppSettingsToggler sut)
         {
             Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }

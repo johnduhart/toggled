@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Toggled.Exceptions;
 using Toggled.Tests.Fixtures;
 using Toggled.Tests.Helpers;
-using Toggled.Toggles;
+using Toggled.Togglers;
 using Toggled.Traits;
 using Xunit;
 
@@ -13,7 +13,7 @@ namespace Toggled.Tests.UnitTests.Toggles
     {
         [Theory, ToggledAutoData]
         public void FeatureWithDefaultValueTraitShouldReturnDefaultValue(FeatureFixture feature,
-            DefaultValueTrait defaultValueTrait, DefaultValueToggle sut)
+            DefaultValueTrait defaultValueTrait, DefaultValueToggler sut)
         {
             feature.Traits.Add(defaultValueTrait);
 
@@ -23,7 +23,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         }
 
         [Theory, ToggledAutoData]
-        public void FeatureWithoutDefaultValueTraitShouldReturnNull(FeatureFixture feature, DefaultValueToggle sut)
+        public void FeatureWithoutDefaultValueTraitShouldReturnNull(FeatureFixture feature, DefaultValueToggler sut)
         {
             bool? result = sut.IsEnabled(null, feature);
 
@@ -31,14 +31,14 @@ namespace Toggled.Tests.UnitTests.Toggles
         }
 
         [Theory, ToggledAutoData]
-        public void GivenNullFeatureThrows(DefaultValueToggle sut)
+        public void GivenNullFeatureThrows(DefaultValueToggler sut)
         {
             Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }
 
         [Theory, ToggledAutoData]
         public void FeatureWithMultipleDefaultValueTraitsThrows(FeatureFixture feature,
-            IEnumerable<DefaultValueTrait> defaultValueTraits, DefaultValueToggle sut)
+            IEnumerable<DefaultValueTrait> defaultValueTraits, DefaultValueToggler sut)
         {
             feature.Traits.AddRange(defaultValueTraits);
 

@@ -2,9 +2,9 @@
 using System.Linq;
 using Toggled.Traits;
 
-namespace Toggled.Toggles
+namespace Toggled.Togglers
 {
-    public class DependentFeatureToggle : IFeatureToggle
+    public class DependentFeatureToggler : IFeatureToggler
     {
         public bool? IsEnabled(IFeatureContext featureContext, IFeature feature)
         {

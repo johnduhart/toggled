@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
 
-namespace Toggled.Toggles
+namespace Toggled.Togglers
 {
-    public class AppSettingsToggle : IFeatureToggle
+    public class AppSettingsToggler : IFeatureToggler
     {
         public const string SettingsPrefix = "Feature:";
 

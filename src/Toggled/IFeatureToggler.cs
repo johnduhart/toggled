@@ -1,11 +1,9 @@
 namespace Toggled
 {
-    // TODO: This naming sucks, find an alternative
     /// <summary>
-    /// Represents a configuration source that may define a feature
-    /// as enabled or disabled.
+    /// Logic that is applied to a feature to determine its current state
     /// </summary>
-    public interface IFeatureToggle
+    public interface IFeatureToggler
     {
         /// <summary>
         /// Checks to see if a feature has a defined state.

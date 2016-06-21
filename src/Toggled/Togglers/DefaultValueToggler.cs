@@ -3,9 +3,9 @@ using System.Linq;
 using Toggled.Exceptions;
 using Toggled.Traits;
 
-namespace Toggled.Toggles
+namespace Toggled.Togglers
 {
-    public class DefaultValueToggle : IFeatureToggle
+    public class DefaultValueToggler : IFeatureToggler
     {
         public bool? IsEnabled(IFeatureContext featureContext, IFeature feature)
         {

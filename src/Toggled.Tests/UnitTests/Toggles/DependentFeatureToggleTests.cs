@@ -2,7 +2,7 @@
 using FakeItEasy;
 using Toggled.Tests.Fixtures;
 using Toggled.Tests.Helpers;
-using Toggled.Toggles;
+using Toggled.Togglers;
 using Toggled.Traits;
 using Xunit;
 
@@ -11,19 +11,19 @@ namespace Toggled.Tests.UnitTests.Toggles
     public class DependentFeatureToggleTests
     {
         [Theory, ToggledAutoData]
-        public void GivenNullFeatureThrows(IFeatureContext featureContext, DependentFeatureToggle sut)
+        public void GivenNullFeatureThrows(IFeatureContext featureContext, DependentFeatureToggler sut)
         {
             Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(featureContext, null));
         }
 
         [Theory, ToggledAutoData]
-        public void GivenNullFeatueContextThrowsException(IFeature feature, DependentFeatureToggle sut)
+        public void GivenNullFeatueContextThrowsException(IFeature feature, DependentFeatureToggler sut)
         {
             Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, feature));
         }
 
         [Theory, ToggledAutoData]
-        public void IgnoresFeatureWithoutDependentFeatureTrait(IFeatureContext featureContext, IFeature feature, DependentFeatureToggle sut)
+        public void IgnoresFeatureWithoutDependentFeatureTrait(IFeatureContext featureContext, IFeature feature, DependentFeatureToggler sut)
         {
             bool? result = sut.IsEnabled(featureContext, feature);
 
@@ -31,7 +31,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         }
 
         [Theory, ToggledAutoData]
-        public void ChecksStateOfDependentFeatures(IFeatureContext featureContext, FeatureFixture feature, IFeature dependentFeature, DependentFeatureToggle sut)
+        public void ChecksStateOfDependentFeatures(IFeatureContext featureContext, FeatureFixture feature, IFeature dependentFeature, DependentFeatureToggler sut)
         {
             A.CallTo(() => featureContext.IsEnabled(dependentFeature))
                 .Returns(true);
@@ -45,7 +45,7 @@ namespace Toggled.Tests.UnitTests.Toggles
 
         [Theory, ToggledAutoData]
         public void ChecksStateOfAllDependentFeatures(IFeatureContext featureContext, FeatureFixture feature,
-            IFeature dependentFeature, DependentFeatureToggle sut)
+            IFeature dependentFeature, DependentFeatureToggler sut)
         {
             A.CallTo(() => featureContext.IsEnabled(dependentFeature))
                 .Returns(true);
@@ -62,7 +62,7 @@ namespace Toggled.Tests.UnitTests.Toggles
 
         [Theory, ToggledAutoData]
         public void ReturnsFalseWhenDependentFeatureIsDisabled(IFeatureContext featureContext, FeatureFixture feature,
-            IFeature dependentFeature, DependentFeatureToggle sut)
+            IFeature dependentFeature, DependentFeatureToggler sut)
         {
             A.CallTo(() => featureContext.IsEnabled(dependentFeature))
                 .Returns(false);
@@ -75,7 +75,7 @@ namespace Toggled.Tests.UnitTests.Toggles
 
         [Theory, ToggledAutoData]
         public void ReturnsFalseWhenDependentFeatureIsEnabled(IFeatureContext featureContext, FeatureFixture feature,
-            IFeature dependentFeature, DependentFeatureToggle sut)
+            IFeature dependentFeature, DependentFeatureToggler sut)
         {
             A.CallTo(() => featureContext.IsEnabled(dependentFeature))
                 .Returns(true);

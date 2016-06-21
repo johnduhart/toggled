@@ -13,9 +13,9 @@ Feature toggles for .NET
 Create and set your context:
 
 ```csharp
-Feature.Context = new FeatureContext(new FeatureToggleProvider(
-	new AppSettingsToggle(),
-	new DefaultValueToggle()));
+Feature.Context = new FeatureContext(new FeatureTogglerProvider(
+	new AppSettingsToggler(),
+	new DefaultValueToggler()));
 ```
 
 Create a new feature:

@@ -1,5 +1,5 @@
 ﻿using Toggled.Tests.Helpers;
-using Toggled.Toggles;
+using Toggled.Togglers;
 using Toggled.Traits;
 using Xunit;
 
@@ -16,7 +16,7 @@ namespace Toggled.Tests.IntegrationTests
 
         public BasicUsage()
         {
-            _featureContext = new FeatureContext(new FeatureToggleProvider(new DefaultValueToggle()));
+            _featureContext = new FeatureContext(new FeatureTogglerSource(new DefaultValueToggler()));
         }
 
         [Fact]

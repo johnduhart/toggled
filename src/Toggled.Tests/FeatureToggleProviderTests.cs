@@ -30,17 +30,5 @@ namespace Toggled.Tests
 
             Assert.Same(featureToggles, result);
         }
-
-        public void xxx()
-        {
-            Feature.Context = new FeatureContext(new FeatureToggleProvider(
-                new AppSettingsToggle(),
-                new DefaultValueToggle()));
-
-            IFeature MyFeature = FeatureBuilder.Create("MyFeature")
-                .Description("This is my feature.")
-                .WithDefaultValue(false)
-                .Build();
-        }
     }
 }

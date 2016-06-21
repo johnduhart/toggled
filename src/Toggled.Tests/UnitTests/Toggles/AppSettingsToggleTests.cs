@@ -24,7 +24,7 @@ namespace Toggled.Tests.UnitTests.Toggles
 
             using (AppSetting.Use($"{AppSettingsToggle.SettingsPrefix}{feature.Id}", value))
             {
-                bool? result = sut.IsEnabled(feature);
+                bool? result = sut.IsEnabled(null, feature);
 
                 Assert.Equal(expected, result);
             }
@@ -35,7 +35,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         {
             feature.Id = fixture.Create<string>();
 
-            bool? result = sut.IsEnabled(feature);
+            bool? result = sut.IsEnabled(null, feature);
 
             Assert.Equal(null, result);
         }
@@ -43,7 +43,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         [Theory, ToggledAutoData]
         public void ThrowsExceptionWhenGivenNullFeature(AppSettingsToggle sut)
         {
-            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null));
+            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }
     }
 }

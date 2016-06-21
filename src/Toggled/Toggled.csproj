@@ -59,7 +59,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Toggles\AppSettingsToggle.cs" />
     <Compile Include="Toggles\DefaultValueToggle.cs" />
+    <Compile Include="Toggles\DependentFeatureToggle.cs" />
     <Compile Include="Traits\DefaultValueTrait.cs" />
+    <Compile Include="Traits\DependentFeatureTrait.cs" />
     <Compile Include="Traits\FeatureBuilderTraitExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         {
             feature.Traits.Add(defaultValueTrait);
 
-            bool? result = sut.IsEnabled(feature);
+            bool? result = sut.IsEnabled(null, feature);
 
             Assert.Equal(defaultValueTrait.DefaultValue, result);
         }
@@ -25,7 +25,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         [Theory, ToggledAutoData]
         public void FeatureWithoutDefaultValueTraitShouldReturnNull(FeatureFixture feature, DefaultValueToggle sut)
         {
-            bool? result = sut.IsEnabled(feature);
+            bool? result = sut.IsEnabled(null, feature);
 
             Assert.Null(result);
         }
@@ -33,7 +33,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         [Theory, ToggledAutoData]
         public void GivenNullFeatureThrows(DefaultValueToggle sut)
         {
-            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null));
+            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }
 
         [Theory, ToggledAutoData]
@@ -42,7 +42,7 @@ namespace Toggled.Tests.UnitTests.Toggles
         {
             feature.Traits.AddRange(defaultValueTraits);
 
-            Assert.Throws<InvalidFeatureException>(() => sut.IsEnabled(feature));
+            Assert.Throws<InvalidFeatureException>(() => sut.IsEnabled(null, feature));
         }
     }
 }

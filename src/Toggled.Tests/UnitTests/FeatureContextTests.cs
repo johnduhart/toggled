@@ -31,14 +31,14 @@ namespace Toggled.Tests.UnitTests
         public void IsEnabledCallsIsEnabledOnToggle([Frozen] IFeatureToggleProvider toggleProvider, IFeature feature,
             IFeatureToggle featureToggle, bool expected, FeatureContext sut)
         {
-            A.CallTo(() => featureToggle.IsEnabled(feature))
+            A.CallTo(() => featureToggle.IsEnabled(sut, feature))
                 .Returns(expected);
             A.CallTo(() => toggleProvider.GetFeatureToggles())
                 .Returns(new[] {featureToggle});
 
             bool result = sut.IsEnabled(feature);
 
-            A.CallTo(() => featureToggle.IsEnabled(feature))
+            A.CallTo(() => featureToggle.IsEnabled(sut, feature))
                 .MustHaveHappened();
             Assert.Equal(expected, result);
         }
@@ -50,11 +50,11 @@ namespace Toggled.Tests.UnitTests
             var featureToggles = fixture.CreateMany<Fake<IFeatureToggle>>().ToList();
             foreach (Fake<IFeatureToggle> fake in featureToggles)
             {
-                fake.CallsTo(ft => ft.IsEnabled(feature))
+                fake.CallsTo(ft => ft.IsEnabled(sut, feature))
                     .Returns(null);
             }
             var finalTogle = A.Fake<Fake<IFeatureToggle>>();
-            finalTogle.CallsTo(ft => ft.IsEnabled(feature))
+            finalTogle.CallsTo(ft => ft.IsEnabled(sut, feature))
                 .Returns(true);
             featureToggles.Add(finalTogle);
 
@@ -65,7 +65,7 @@ namespace Toggled.Tests.UnitTests
 
             foreach (Fake<IFeatureToggle> fake in featureToggles)
             {
-                fake.CallsTo(ft => ft.IsEnabled(feature))
+                fake.CallsTo(ft => ft.IsEnabled(sut, feature))
                     .MustHaveHappened();
             }
         }
@@ -75,7 +75,7 @@ namespace Toggled.Tests.UnitTests
             IFeature feature, IFeatureToggle skippedToggle, IFeatureToggle enabledToggle, IFeatureToggle endToggle,
             bool expected, FeatureContext sut)
         {
-            A.CallTo(() => enabledToggle.IsEnabled(feature))
+            A.CallTo(() => enabledToggle.IsEnabled(sut, feature))
                 .Returns(expected);
             A.CallTo(() => toggleProvider.GetFeatureToggles())
                 .Returns(new[] {skippedToggle, enabledToggle, endToggle});
@@ -83,7 +83,7 @@ namespace Toggled.Tests.UnitTests
             bool result = sut.IsEnabled(feature);
 
             Assert.Equal(expected, result);
-            A.CallTo(() => endToggle.IsEnabled(feature))
+            A.CallTo(() => endToggle.IsEnabled(sut, feature))
                 .MustNotHaveHappened();
         }
 

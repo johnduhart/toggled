@@ -7,7 +7,7 @@ namespace Toggled.Toggles
     {
         public const string SettingsPrefix = "Feature:";
 
-        public bool? IsEnabled(IFeature feature)
+        public bool? IsEnabled(IFeatureContext featureContext, IFeature feature)
         {
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));

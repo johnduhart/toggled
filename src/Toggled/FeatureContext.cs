@@ -22,7 +22,7 @@ namespace Toggled
 
             foreach (IFeatureToggle toggle in _toggleProvider.GetFeatureToggles())
             {
-                bool? result = toggle.IsEnabled(feature);
+                bool? result = toggle.IsEnabled(this, feature);
                 if (result.HasValue)
                     return result.Value;
             }

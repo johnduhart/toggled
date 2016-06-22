@@ -20,7 +20,7 @@ namespace Toggled
             if (featureTogglers == null)
                 throw new ArgumentNullException(nameof(featureTogglers));
             if (featureTogglers.Length == 0)
-                throw new ArgumentException("featureToggles be an empty array.", nameof(featureTogglers));
+                throw new ArgumentException("featureToggles cannot be an empty array.", nameof(featureTogglers));
 
             _featureTogglers = featureTogglers;
         }

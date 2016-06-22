@@ -5,22 +5,22 @@ namespace Toggled
 {
     public class FeatureContext : IFeatureContext
     {
-        private readonly IFeatureTogglerSource _togglerSource;
-
         public FeatureContext(IFeatureTogglerSource togglerSource)
         {
             if (togglerSource == null)
                 throw new ArgumentNullException(nameof(togglerSource));
 
-            _togglerSource = togglerSource;
+            TogglerSource = togglerSource;
         }
+
+        public IFeatureTogglerSource TogglerSource { get; }
 
         public bool IsEnabled(IFeature feature)
         {
             if (feature == null)
                 throw new ArgumentNullException(nameof(feature));
 
-            foreach (IFeatureToggler toggle in _togglerSource.GetFeatureToggles())
+            foreach (IFeatureToggler toggle in TogglerSource.GetFeatureToggles())
             {
                 bool? result = toggle.IsEnabled(this, feature);
                 if (result.HasValue)

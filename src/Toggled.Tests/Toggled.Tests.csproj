@@ -85,6 +85,9 @@
   <ItemGroup>
     <Compile Include="IntegrationTests\BasicUsage.cs" />
     <Compile Include="IntegrationTests\DependentFeatureUsage.cs" />
+    <Compile Include="IntegrationTests\FeatureContextConfigurationUsage.cs" />
+    <Compile Include="UnitTests\Configuration\FeatureContextConfigurationTests.cs" />
+    <Compile Include="UnitTests\Configuration\TogglerBuilderExtensionsTests.cs" />
     <Compile Include="UnitTests\FeatureBuilderTests.cs" />
     <Compile Include="UnitTests\FeatureBuilderTraitExtensionsTests.cs" />
     <Compile Include="UnitTests\FeatureContextExtensionsTests.cs" />

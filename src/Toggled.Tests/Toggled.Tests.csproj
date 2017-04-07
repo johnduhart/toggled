@@ -83,12 +83,17 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="FeatureBuilderTests.cs" />
-    <Compile Include="FeatureBuilderTraitExtensionsTests.cs" />
-    <Compile Include="FeatureContextExtensionsTests.cs" />
-    <Compile Include="FeatureContextTests.cs" />
-    <Compile Include="FeatureTests.cs" />
-    <Compile Include="FeatureToggleProviderTests.cs" />
+    <Compile Include="IntegrationTests\BasicUsage.cs" />
+    <Compile Include="IntegrationTests\DependentFeatureUsage.cs" />
+    <Compile Include="IntegrationTests\FeatureContextConfigurationUsage.cs" />
+    <Compile Include="UnitTests\Configuration\FeatureContextConfigurationTests.cs" />
+    <Compile Include="UnitTests\Configuration\TogglerBuilderExtensionsTests.cs" />
+    <Compile Include="UnitTests\FeatureBuilderTests.cs" />
+    <Compile Include="UnitTests\FeatureBuilderTraitExtensionsTests.cs" />
+    <Compile Include="UnitTests\FeatureContextExtensionsTests.cs" />
+    <Compile Include="UnitTests\FeatureContextTests.cs" />
+    <Compile Include="UnitTests\FeatureTests.cs" />
+    <Compile Include="UnitTests\FeatureToggleProviderTests.cs" />
     <Compile Include="Fixtures\FeatureFixture.cs" />
     <Compile Include="Helpers\AppSetting.cs" />
     <Compile Include="Helpers\ContextSwitcher.cs" />
@@ -96,9 +101,11 @@
     <Compile Include="Helpers\ToggledAutoData.cs" />
     <Compile Include="Helpers\ToggledInlineAutoDataAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Toggles\AppSettingsToggleTests.cs" />
-    <Compile Include="Toggles\DefaultValueToggleTests.cs" />
-    <Compile Include="TraitTests.cs" />
+    <Compile Include="UnitTests\Toggles\AppSettingsToggleTests.cs" />
+    <Compile Include="UnitTests\Toggles\DefaultValueToggleTests.cs" />
+    <Compile Include="UnitTests\Toggles\DependentFeatureToggleTests.cs" />
+    <Compile Include="UnitTests\Traits\DependentFeatureTraitTests.cs" />
+    <Compile Include="UnitTests\TraitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Toggled\Toggled.csproj">

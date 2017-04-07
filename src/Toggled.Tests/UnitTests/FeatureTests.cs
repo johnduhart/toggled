@@ -4,7 +4,7 @@ using Toggled.Exceptions;
 using Toggled.Tests.Helpers;
 using Xunit;
 
-namespace Toggled.Tests
+namespace Toggled.Tests.UnitTests
 {
     public class FeatureTests
     {

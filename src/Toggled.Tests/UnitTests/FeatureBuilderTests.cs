@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Toggled.Tests.Helpers;
 using Xunit;
 
-namespace Toggled.Tests
+namespace Toggled.Tests.UnitTests
 {
     public class FeatureBuilderTests
     {

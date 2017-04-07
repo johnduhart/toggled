@@ -2,10 +2,10 @@
 using Ploeh.AutoFixture;
 using Toggled.Tests.Fixtures;
 using Toggled.Tests.Helpers;
-using Toggled.Toggles;
+using Toggled.Togglers;
 using Xunit;
 
-namespace Toggled.Tests.Toggles
+namespace Toggled.Tests.UnitTests.Toggles
 {
     public class AppSettingsToggleTests
     {
@@ -17,33 +17,33 @@ namespace Toggled.Tests.Toggles
         [ToggledInlineAutoData("False", false)]
         [ToggledInlineAutoData("on", null)]
         [ToggledInlineAutoData("1", null)]
-        public void ReturnsAppSettingValueWhenSet(string value, bool? expected, FeatureFixture feature, Fixture fixture, AppSettingsToggle sut)
+        public void ReturnsAppSettingValueWhenSet(string value, bool? expected, FeatureFixture feature, Fixture fixture, AppSettingsToggler sut)
         {
             // Apparently AutoFixture will reuse the feature
             feature.Id = fixture.Create<string>();
 
-            using (AppSetting.Use($"{AppSettingsToggle.SettingsPrefix}{feature.Id}", value))
+            using (AppSetting.Use($"{AppSettingsToggler.SettingsPrefix}{feature.Id}", value))
             {
-                bool? result = sut.IsEnabled(feature);
+                bool? result = sut.IsEnabled(null, feature);
 
                 Assert.Equal(expected, result);
             }
         }
 
         [Theory, ToggledAutoData]
-        public void ReturnsNullWhenNoValueExists(FeatureFixture feature, Fixture fixture, AppSettingsToggle sut)
+        public void ReturnsNullWhenNoValueExists(FeatureFixture feature, Fixture fixture, AppSettingsToggler sut)
         {
             feature.Id = fixture.Create<string>();
 
-            bool? result = sut.IsEnabled(feature);
+            bool? result = sut.IsEnabled(null, feature);
 
             Assert.Equal(null, result);
         }
 
         [Theory, ToggledAutoData]
-        public void ThrowsExceptionWhenGivenNullFeature(AppSettingsToggle sut)
+        public void ThrowsExceptionWhenGivenNullFeature(AppSettingsToggler sut)
         {
-            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null));
+            Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }
     }
 }

@@ -7,15 +7,15 @@ Feature toggles for .NET
 |Branch|AppVeyor|CodeCov|
 |------|:--------:|:------:|
 |master|[![Master Build status](https://ci.appveyor.com/api/projects/status/sgd8juq9pitr2o8l/branch/master?svg=true)](https://ci.appveyor.com/project/johnduhart/toggled/branch/master)|[![codecov](https://codecov.io/gh/johnduhart/toggled/branch/master/graph/badge.svg)](https://codecov.io/gh/johnduhart/toggled)|
-|develop |[![Build status](https://ci.appveyor.com/api/projects/status/sgd8juq9pitr2o8l/branch/develop?svg=true)](https://ci.appveyor.com/project/johnduhart/toggled/branch/master)|[![codecov](https://codecov.io/gh/johnduhart/toggled/branch/develop/graph/badge.svg)](https://codecov.io/gh/johnduhart/toggled)|
+|develop |[![Build status](https://ci.appveyor.com/api/projects/status/sgd8juq9pitr2o8l/branch/develop?svg=true)](https://ci.appveyor.com/project/johnduhart/toggled/branch/develop)|[![codecov](https://codecov.io/gh/johnduhart/toggled/branch/develop/graph/badge.svg)](https://codecov.io/gh/johnduhart/toggled)|
 
 ## Usage
 Create and set your context:
 
 ```csharp
-Feature.Context = new FeatureContext(new FeatureToggleProvider(
-	new AppSettingsToggle(),
-	new DefaultValueToggle()));
+Feature.Context = new FeatureContext(new FeatureTogglerProvider(
+	new AppSettingsToggler(),
+	new DefaultValueToggler()));
 ```
 
 Create a new feature:

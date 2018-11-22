@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET462
+using System;
 using AutoFixture;
 using Toggled.Tests.Fixtures;
 using Toggled.Tests.Helpers;
@@ -7,7 +8,6 @@ using Xunit;
 
 namespace Toggled.Tests.UnitTests.Toggles
 {
-#if NET463
     public class AppSettingsToggleTests
     {
         [Theory]
@@ -47,5 +47,5 @@ namespace Toggled.Tests.UnitTests.Toggles
             Assert.Throws<ArgumentNullException>(() => sut.IsEnabled(null, null));
         }
     }
-#endif
 }
+#endif

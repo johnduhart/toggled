@@ -1,3 +1,5 @@
+image: Visual Studio 2017
+
 assembly_info:
   patch: false
 
@@ -5,24 +7,29 @@ install:
   - choco install gitversion.portable -pre -y
 
 before_build:
-- nuget restore
-- nuget install OpenCover -ExcludeVersion -OutputDirectory packages
-- nuget install xunit.runner.console -ExcludeVersion -OutputDirectory packages
-- set xunit20=%APPVEYOR_BUILD_FOLDER%\packages\xunit.runner.console\tools
-- ps: gitversion /l console /output buildserver /updateAssemblyInfo
+- cmd: dotnet --info
+- cmd: dotnet restore
+#- nuget restore
+#- nuget install OpenCover -ExcludeVersion -OutputDirectory packages
+#- nuget install xunit.runner.console -ExcludeVersion -OutputDirectory packages
+#- set xunit20=%APPVEYOR_BUILD_FOLDER%\packages\xunit.runner.console\tools
+#- ps: gitversion /l console /output buildserver /updateAssemblyInfo
 #- ps: Update-AppveyorBuild -Version $env:GitVersion_NuGetVersion
 
-configuration:
-  - Release
+#configuration:
+#  - Release
 
-build:
-  publish_nuget: false
-  verbosity: minimal
-  project: Toggled.sln
+#build:
+#  publish_nuget: false
+#  verbosity: minimal
+#  project: Toggled.sln
 
-after_build:
-  - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"
+build_script:
+- cmd: dotnet build
+
+#after_build:
+#  - cmd: nuget pack src\Toggled\Toggled.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+#  - cmd: appveyor PushArtifact "Toggled.%GitVersion_NuGetVersion%.nupkg"
 
 test:
   assemblies:

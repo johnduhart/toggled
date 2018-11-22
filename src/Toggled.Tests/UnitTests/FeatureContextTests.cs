@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using FakeItEasy;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.Xunit2;
+using AutoFixture;
+using AutoFixture.Xunit2;
 using Toggled.Exceptions;
 using Toggled.Tests.Helpers;
 using Xunit;

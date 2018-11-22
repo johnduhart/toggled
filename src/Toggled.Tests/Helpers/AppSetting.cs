@@ -3,6 +3,7 @@ using System.Configuration;
 
 namespace Toggled.Tests.Helpers
 {
+#if NET462
     public class AppSetting : IDisposable
     {
         private readonly string _key;
@@ -32,4 +33,5 @@ namespace Toggled.Tests.Helpers
             //ConfigurationManager.AppSettings.Remove(_key);
         }
     }
+#endif
 }

@@ -1,6 +1,6 @@
-﻿using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoFakeItEasy;
-using Ploeh.AutoFixture.Xunit2;
+﻿using AutoFixture;
+using AutoFixture.AutoFakeItEasy;
+using AutoFixture.Xunit2;
 
 namespace Toggled.Tests.Helpers
 {

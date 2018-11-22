@@ -14,7 +14,9 @@ namespace Toggled.Tests.IntegrationTests
             _featureContext = new FeatureContextBuilder()
                 .Togglers
                     .DependentFeatureToggler()
+#if NET462
                     .AppSettingsToggler()
+#endif
                     .DefaultValueToggler()
                     .End()
                 .GetContext();
@@ -27,7 +29,9 @@ namespace Toggled.Tests.IntegrationTests
 
             Assert.Collection(togglers, 
                 toggler => Assert.IsType<DependentFeatureToggler>(toggler),
+#if NET462
                 toggler => Assert.IsType<AppSettingsToggler>(toggler),
+#endif
                 toggler => Assert.IsType<DefaultValueToggler>(toggler));
         }
     }

@@ -24,6 +24,7 @@ namespace Toggled.Tests.UnitTests.Configuration
                 .MustHaveHappened();
         }
 
+#if NET462
         [Theory, ToggledAutoData]
         public void AppSettingsTogglerAddsToggler(ITogglerBuilder togglerBuilder)
         {
@@ -37,6 +38,7 @@ namespace Toggled.Tests.UnitTests.Configuration
             A.CallTo(() => togglerBuilder.AddToggler(A<AppSettingsToggler>._))
                 .MustHaveHappened();
         }
+#endif
 
         [Theory, ToggledAutoData]
         public void DependentFeatureTogglerAddsToggler(ITogglerBuilder togglerBuilder)
